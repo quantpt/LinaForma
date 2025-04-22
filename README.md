@@ -20,14 +20,6 @@ LinaForma is a series of MATLAB® scripts for calculating the optimal pressure-t
 LinaForma requires no prior computer programming knowledge and a step-by-step walkthrough is provided.
 
 
-Key Features
--------
-There are three key packages:
-1) **LinaForma_inversion**: this package performs a grid-search inversion to quantify which P-T conditions best fit the rock of interest. Bootstrap re-sampling provides an assessment of the uncertainty associated with this P-T estimate, and the sensitivity of the estimate to uncertainty in the input variables.
-2) **TheriakDomino_tools**: this package provides useful tools for creating bulk-composition THERIN files (E1 script), collating DOMINO output into a single csv. file (E2), automating THERIAK (E3), plotting data in heatmaps, contour plots etc. (E4), and calculating the correlation coefficients between the different variables, temperature and pressure (E5).
-3) **PCA_phase_composition**: this package allows the user to perform Principal Component Analysis and K-means clustering on mineral composition data.
-
-
 Citation
 --------
 If you find this package useful, please do consider citing it using the following:
