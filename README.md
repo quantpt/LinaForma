@@ -48,7 +48,7 @@ Contact
 -------
 Any comments/questions can be directed to:
 * **Tobermory Mackay-Champion** - tmackaychampion@gmail.com
-* **Ian Cawood** - ian.cawood@worc.ox.ac.uk
+* **Ian Cawood** - ipcawood@gmail.com
 
 License
 -------
