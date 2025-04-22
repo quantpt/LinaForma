@@ -1,0 +1,30 @@
+Overall
+-------
+Mean = 580 ± 8 °C, 9.97 ± 1.09 kbar (2σ)
+Median = 579 °C (IQR = 573-585 °C), 9.61 kbar (IQR = 9.36-10 kbar)
+X_total (Median) = 2.04
+SE = 2 °C (0.345 %), 0.33 kbar (3.43 %)
+# of variables = 11
+# of fitted variables = 7
+Model resolution = 3.03 °C, 0.0808 kbar
+Bootstrap resamples = 50
+
+Single Variable Diagnostics (Median)
+------------------------------------
+             xgr[Grt]     xspss[Grt]   tot xprp     Mg#[Grt]     Sipfu[Bt]    Alpfu[Bt]    xTi[Bt]      Mg#[Bt]      Sipfu[mu]    xcel[mu]     xpa[mu]     
+Column       3            4            5            6            7            8            9            10           11           12           13          
+μ + 2σ       0.07243      0.02657      0.1857       0.1992       2.744        1.763        0.1111       0.4968       3.115        0.1014       0.2597      
+μ - 2σ       0.04593      0.01084      0.1415       0.1556       2.682        1.667        0.09294      0.483        3.021        0.05729      0.2006      
+σ % of μ     11.19        21.02        6.745        6.149        0.5716       1.404        4.439        0.7007       0.7625       13.89        6.422       
+Prediction   0.05727      0.01992      0.1876       0.1992       2.729        1.424        0.09709      0.564        3.057        0.04058      0.2255      
+X_i          0.1446       0.1538       1.089        0.9981       0.5167       6.037        0.5425       10.79        0.2452       1.758        0.1572      
+ΔT (°C)      7.717        11.12        1.01         2.089        1.01         1.01         3.908        1.01         1.01         1.01         7.702       
+ΔP (kbar)    1.467        1.158        0.2805       0.338        0.2805       0.2805       0.5123       0.2805       0.2805       0.2805       0.4022      
+
+Result Summary
+--------------
+**** Warning: Fit is poor. Inversion score above 1. Remove ill-fitting variables.
+**** Warning: tot xprp has a score above 1 (Score: 1.09).
+**** Warning: Alpfu[Bt] has a score above 1 (Score: 6.04).
+**** Warning: Mg#[Bt] has a score above 1 (Score: 10.79).
+**** Warning: xcel[mu] has a score above 1 (Score: 1.76).
