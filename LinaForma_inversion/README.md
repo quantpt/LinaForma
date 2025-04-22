@@ -13,41 +13,6 @@ All of the codes require the same two inputs:
 
 ## L0_isopleths.m
 This code allows the user to ascertain which regions in P-T space coincide with the observed values for each parameter of interest. Zones of intersecting isopleths will be plotted.
-
-<details>
-<summary> L0 script input </summary>
-
- % ====== Data ======\
-**model = '?'**\
- This is the CSV file for the forward models (e.g., inputs/forward_model.csv).\
-**measurements = '?'**\
-This is the CSV file for the measurements (e.g., 'inputs/measurement_distributions.csv').
-
-% ====== Data type ======\
-**raw = ?**\
-This is the type of format you have used for your input measurements file. If you have used InputA (see above), then raw = 1. If you have used InputB, then raw = 0.
-
-% ====== Range of values (only applicable if raw = 0 ======\
-**sd = ?**\
-This parameter is only applicable if you have used InputA, and controls the range of isopleth values plotted\
-(i.e., range = MEAN +/- sd * STANDARDDEVIATION).
-
-% ====== PLOTS ======\
-% PLOT 1 = percentage overlap plot\
-**all1 = ?**\
-% Do you want to plot all of the variables? 1 = YES, 0 = NO.\
-**columns1 = [?]**\
-If you have selected all1 = 0, which column of the input measurements (i.e., variables) do you want to plot?\
-
-% PLOT 2 = individual isopleths\
-**all2 = ?**\
-Do you want to plot all of the variables? 1 = YES, 0 = NO.\
-**columns2 = [?]**\
-If you have selected all2 = 0, which column of the input measurements (i.e., variables) do you want to plot?\
-</details>
-
-<details>
-<summary> L0 script output </summary>
  
 The code outputs three figures: 
 1) **Percentage overlap**. This plot shows the regions in P-T space which have the greatest percentage of overlapping variables. 
@@ -75,38 +40,6 @@ The grid-search inversion works by calculating the misfit between the observed d
 <img src="https://github.com/TMackay-Champion/LinaForma/blob/3aaf53b7526049c99e900da48fb3ca8a4db37272/images/L_bootstrap.png", width="90%">
 </p>
 </details>
-
-<details>
-<summary> L2 script input </summary>
- 
-% ====== Data ======\
-**model = '?'**. As above.\
-**measurements = '?'**. As above.
-
-% ====== Data type ======\
-**raw = ?**. As above.
-
-% ====== Bootstrapping variables ======\
-**bootstrap_type = ?**\
-The type of bootstrapping. Parametric = 1, non-parametric = 0. Only parametric is available if raw = 0.\
-**it = ?**\
-The number of re-samples you want to take.
-
-% ====== PLOTS ======\
-**confidence_level = ?**\
-The 2D confidence level for the ellipse plotted in Figure 2.\
-**boxplots = ?**\
-Do you want boxplots or histograms? 1 = boxplot, 0 = histogram.\
-**plot_type = ?**\
-% What type of plot do you want in Figure 2? 1 = contour plot, 0 = heatmap.\
-**T_bins = ?**\
-Number of temperature bins in 2D histogram (Figure 2, 4).\
-**P_bins = ?**\
-Number of pressure bins in 2D histogram (Figure 2, 4).\
-</details>
-
-<details>
-<summary> L2 script output </summary>
  
 The code outputs four figures:
 
