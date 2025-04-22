@@ -56,35 +56,8 @@ The code outputs three figures:
 </details>
 
 
-## L1_error.m
-No two measurements will be exactly the same. This script allows the user to assess the uncertainty in P-T estimate for each variable, based on the variation in observations. This variation may be caused by analytical or geological processes. 
-
-<details>
-<summary> L1 script input </summary>
-
-% ====== Data ======\
-**model = '?'**. As above.\
-**measurements = '?'**. As above.
-
-% ====== Data type ======\
-**raw = ?**. As above.
-
-% ====== Sampling variables (only applicable if raw = 0) ======\
-**n = ?**\
-This is only applicable if raw = 0. It controls the number of random samples taken from the distribution of each variable (it assumes a normal distrubtion, created using the input mean and standard deviation).
-</details>
-
-<details>
-<summary> L1 script output </summary>
- 
-The code outputs two figures: 
-1) a boxplot for each variable showing how temperature estimates vary based on the range of measured values.
-2) a boxplot for each variable showing how pressure estimates vary based on the range of measured values.
-</details>
-
-
-## L2_inversion.m
-This code performs a bootstrap re-sampling of the observation data, and a grid-search inversion to find the best-fit solution for each bootstrap resample. These are combined to give the user a best-fit pressure-temperature estimate and associated uncertainty for the system of interest. 
+## L1_inversion.m
+This code performs a bootstrap re-sampling of the observation data, and a grid-search inversion to find the best-fit solution for each bootstrap resample. These are combined to give the user a best-fit pressure-temperature estimate and associated uncertainty for the system of interest. Diagnostic metrics are given with each run so the user can assess the quality of the inversion data-fit.
 
 The grid-search inversion works by calculating the misfit between the observed data and the forward model at each P-T point in the forward model CSV file dataset. The best-fit solution is the P-T point with the lowest misfit value. It is important that the grid spacing is dense enough to ensure the minimum misfit is not missed between the grid spaces. 
 
@@ -143,7 +116,7 @@ The code outputs four figures:
 4) a 2D histogram of the best-fit solutions.
 </details>
 
-## L3_residuals.m
+## Extra_residuals.m
 This script allows the user to examine the difference between the forward model predicitions and the observed data at chosen P-T points.
 This can be used to check how well different variables match the best-fit solution. When accompanied by textural evidence or large enough datasets, this process could be used to examine disequilibrium and/or model error.
 
@@ -170,7 +143,7 @@ This code outputs boxplots for each variable showing the distribution of observa
 </details>
 
 
-## L4_sensitivity.m
+## Extra_sensitivity.m
 This script examines how sensitive the best-fit solutions are to uncertainty in the observations. To do this, the code bootstrap re-samples one variable at a time while keeping all the other variables constant. The resulting variation in the best-fit solutions can then be directly attritubted to the uncertainty on that particular variable. 
 
 <details>
