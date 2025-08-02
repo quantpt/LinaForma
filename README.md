@@ -25,7 +25,7 @@ Citation
 If you find this package useful, please do consider citing it using the following:
 
 ```console
-Mackay-Champion, T., & Cawood, I. (2024). LinaForma (Version 1.0.) [Computer software]. https://doi.org/10.5281/zenodo.11110441
+Mackay-Champion, T., & Cawood, I. (2024). LinaForma [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.15260652
 ```
 
 
