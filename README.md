@@ -15,7 +15,7 @@
 </p>
 
 
-LinaForma is a series of MATLAB® scripts for calculating the optimal pressure-temperature (P-T) conditions experienced by a rock using a grid-search inversion, accompanied by bootstrap re-sampling to quantify the solution uncertainty and sensitivity to the input variables. LinaForma calculates the difference ("misfit") between measurements (e.g., Xalm) and forward models computed for a range of P-T points in third-party software such as [THERIAK-DOMINO](https://titan.minpet.unibas.ch/minpet/theriak/prog11032020/), [Perple_X](https://www.perplex.ethz.ch/), and [MAGEMin](https://github.com/ComputationalThermodynamics/MAGEMin). The P-T point with the lowest misfit value defines the “best-fit” solution. A suite of tools is also provided for plotting forward model data, performing tasks such as Principal Component Analysis, and automating relevant processes in THERIAK-DOMINO. 
+LinaForma is a series of MATLAB® scripts for calculating the optimal pressure-temperature (P-T) conditions experienced by a rock using a grid-search inversion, accompanied by bootstrap re-sampling to quantify the solution uncertainty and sensitivity to the input variables. LinaForma calculates the difference ("misfit") between measurements (e.g., Xalm) and forward models computed for a range of P-T points in third-party software such as [THERIAK-DOMINO](https://titan.minpet.unibas.ch/minpet/theriak/prog11032020/), [Perple_X](https://www.perplex.ethz.ch/), and [MAGEMin](https://github.com/ComputationalThermodynamics/MAGEMin). The P-T point with the lowest misfit value defines the “best-fit” solution. A separate suite of tools is provided in [Modelling_tools](https://github.com/quantpt/Modelling_tools) for plotting forward model data, performing tasks such as Principal Component Analysis, and automating relevant processes in THERIAK-DOMINO. 
 
 LinaForma requires no prior computer programming knowledge and a step-by-step walkthrough is provided.
 
@@ -25,7 +25,7 @@ Citation
 If you find this package useful, please do consider citing it using the following:
 
 ```console
-Mackay-Champion, T., & Cawood, I. (2024). LinaForma [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.11110440
+Mackay-Champion, T., & Cawood, I. P. (2024). LinaForma [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.11110440
 ```
 
 
