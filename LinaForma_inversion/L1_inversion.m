@@ -25,7 +25,7 @@ it = 50;        % How many random iterations do you want to calculate?
 plotBoot = 0; % 1 = YES, else = NO.
 
 % Inversion results
-plotInv = 1; % 1 = YES, else = NO.
+plotInv = 0; % 1 = YES, else = NO.
 confidenceLevel = 0.68;  % Confidence level for 2D ellipse
 boxplots = 1;   % Do you want boxplots or histograms? 1 = boxplot, 0 = histogram
 plot_type = 0; % What type of plot do you want? 1 = contour plot, 0 = heatmap;
@@ -36,7 +36,7 @@ P_bins = 10; % Number of pressure bins in 2D histogram (Figure 2, 4)
 plotResiduals = 0; % 1 = YES, else = NO.
 
 % Sensitivity
-plotSens = 1; % 1 = YES, else = NO.
+plotSens = 0; % 1 = YES, else = NO.
 
 
 
@@ -133,6 +133,12 @@ d = mu - model_prediction;
 chi_variables = abs(d) ./ (2 * sigma); chiMedVar = chi_variables;
 chiMed = sum(abs(d) ./ (2 * sigma))/length(d);
 
+% Compute smoothed fit metric
+ind = find(abs(temperature - tMed) <= 25 & abs(pressure - pMed) <= 0.25);
+modelPred = model_data(ind,:);
+sigma_grid = std(modelPred);
+chiScaled = abs(d) ./ (2*sigma + sigma_grid);
+
 % Compute sensitivity
 [T_max,T_min,P_max,P_min] = Functions_NO_EDIT.sensitivity(model_data,samples,tMean,pMean,temperature,pressure,sigma,mu,bootstrapType,dataFormat,it);
 tmp01 = [abs(T_max);abs(T_min)]; tmax = max(tmp01,[],1);
@@ -159,8 +165,8 @@ if unitsP == 1
 end
 
 % Variables fit
-results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; tmax; pmax];
-dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','ΔT (°C)','ΔP (kbar)'});
+results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; chiScaled; tmax; pmax];
+dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','X_smooth','ΔT (°C)','ΔP (kbar)'});
 
 % Save results
 filename = "output_variables/TPsolutions_" + sampleName + ".csv";
@@ -199,3 +205,28 @@ Functions_NO_EDIT.writeResults(tMean,stdT,pMean, stdP, tMed,iqrT1,iqrT2,pMed,iqr
 %%%%%%%%%%%%%%%%%%%%%
 %%%% END OF CODE %%%%
 %%%%%%%%%%%%%%%%%%%%%
+
+function sigma_grid = computeSigmaGrid(X)
+    % X = [N x M] matrix of variables
+    %     N = number of points (e.g., 10 P-T points)
+    %     M = number of variables (e.g., XMg, XFe, XCa, ...)
+    % sigma_grid = [N x 1] local variation for each point
+
+    N = size(X,1);
+    sigma_grid = zeros(N,1);
+
+    for i = 1:N
+        diffsq = [];
+
+        for j = 1:N
+            if j ~= i
+                % Euclidean distance in variable space
+                diffX = X(i,:) - X(j,:);
+                d2 = sum(diffX.^2);
+                diffsq(end+1) = d2;
+            end
+        end
+
+        sigma_grid(i) = sqrt(mean(diffsq));
+    end
+end
