@@ -170,7 +170,7 @@ for i = 1:nCols
     misfit = sum(normalizedDiff, 2);
 
     % Find row with smallest normalized misfit
-    [~, rowIdx] = min(misfit);
+    [v, rowIdx] = min(misfit);
 
     % Best (T, P) from training subset
     bestT = temperature(rowIdx);
@@ -182,6 +182,7 @@ for i = 1:nCols
 
     % Prediction error for left-out column
     errors(i) = abs(predictedVal - trueVal)./trueVal*100;
+    mis(i) = v;
 
     % Store T, P as well
     distT(i) = bestT - tMed;
@@ -215,8 +216,8 @@ if unitsP == 1
 end
 
 % Variables fit
-results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; chiScaled; distT; distP; errors; tmax; pmax];
-dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','X_smooth','T_dist','P_dist','LOO error(%)','ΔT (°C)','ΔP (kbar)'});
+results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; chiScaled; distT; distP; errors; mis; tmax; pmax];
+dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','X_smooth','T_dist','P_dist','LOO error(%)','LOOfit','ΔT (°C)','ΔP (kbar)'});
 
 % Save results
 filename = "output_variables/TPsolutions_" + sampleName + ".csv";

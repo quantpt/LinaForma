@@ -1,9 +1,9 @@
 Overall
 -------
-Mean = 580 ± 8 °C, 10.7 ± 1.42 kbar (2σ)
-Median = 579 °C (IQR = 576-585 °C), 10.1 kbar (IQR = 9.36-12.1 kbar)
-X_total (Median) = 0.88
-SE = 3 °C (0.518 %), 0.47 kbar (4.66 %)
+Mean = 580 ± 8 °C, 10.5 ± 1.39 kbar (2σ)
+Median = 579 °C (IQR = 576-585 °C), 10 kbar (IQR = 9.28-11.9 kbar)
+X_total (Median) = 0.789
+SE = 3 °C (0.518 %), 0.46 kbar (4.6 %)
 # of variables = 9
 # of fitted variables = 6
 Model resolution = 3.03 °C, 0.0808 kbar
@@ -16,18 +16,19 @@ Column       3            4            5            6            7            9 
 μ + 2σ       0.07243      0.02657      0.1857       0.1992       2.744        0.1111       3.115        0.1014       0.2597      
 μ - 2σ       0.04593      0.01084      0.1415       0.1556       2.682        0.09294      3.021        0.05729      0.2006      
 σ % of μ     11.19        21.02        6.745        6.149        0.5716       4.439        0.7625       13.89        6.422       
-Prediction   0.06584      0.01713      0.2001       0.2131       2.736        0.09623      3.056        0.04214      0.2485      
-X_i          0.5025       0.2003       1.652        1.634        0.7347       0.6377       0.2547       1.687        0.6204      
-X_smooth     0.2005       0.1611       0.8494       0.8828       0.4556       0.3847       0.2283       1.502        0.3401      
-T_dist       -9.091       -12.12       3.03         3.03         0            0            0            0            -3.03       
-P_dist       2101         -1455        -161.6       -161.6       -404         -404         -404         -404         2182        
-LOO error(%) 72.03        77.34        20.06        17.27        0.6107       5.287        0.4574       48.04        17.16       
-ΔT (°C)      7.477        16.22        1.665        1.826        1.251        1.251        1.251        2.424        7.641       
-ΔP (kbar)    2.425        3.06         1.014        1.012        0.981        0.981        0.981        1.043        1.24        
+Prediction   0.05902      0.01781      0.1984       0.2102       2.734        0.09626      3.056        0.04124      0.2482      
+X_i          0.01236      0.1139       1.578        1.5          0.6613       0.6339       0.261        1.728        0.61        
+X_smooth     0.004972     0.09303      0.8351       0.836        0.4153       0.3792       0.2331       1.532        0.3253      
+T_dist       -9.091       -12.12       3.03         3.03         0            0            0            0            -6.061      
+P_dist       2101         -1293        -161.6       -161.6       -323.2       -323.2       -323.2       -323.2       2182        
+LOO error(%) 70.72        64.79        18.57        15.86        0.6494       4.8          0.3933       47.89        16.94       
+LOOfit       0.3446       0.7146       0.7281       0.7552       0.8928       0.8513       0.8954       0.4204       0.8021      
+ΔT (°C)      8.454        15.58        2.201        2.453        1.508        1.508        1.508        2.631        7.038       
+ΔP (kbar)    2.633        3.346        0.8598       0.8713       0.8157       0.8157       0.8157       0.8756       1.494       
 
 Result Summary
 --------------
 Fit is acceptable. Inversion score below 1.
-**** Warning: tot xprp has a score above 1 (Score: 1.65). The result is sensitive to this variable (T: 0.29%; P: 9.51%). Please remove.
-**** Warning: Mg#[Grt] has a score above 1 (Score: 1.63). The result is sensitive to this variable (T: 0.31%; P: 9.48%). Please remove.
-**** Warning: xcel[mu] has a score above 1 (Score: 1.69). The result is sensitive to this variable (T: 0.42%; P: 9.78%). Please remove.
+**** Warning: tot xprp has a score above 1 (Score: 1.58). The result is sensitive to this variable (T: 0.38%; P: 8.19%). Please remove.
+**** Warning: Mg#[Grt] has a score above 1 (Score: 1.50). The result is sensitive to this variable (T: 0.42%; P: 8.30%). Please remove.
+**** Warning: xcel[mu] has a score above 1 (Score: 1.73). The result is sensitive to this variable (T: 0.45%; P: 8.34%). Please remove.
