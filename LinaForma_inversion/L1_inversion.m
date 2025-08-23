@@ -38,6 +38,9 @@ plotResiduals = 0; % 1 = YES, else = NO.
 % Sensitivity
 plotSens = 0; % 1 = YES, else = NO.
 
+% LOOfit
+plotLOO = 1; % 1  = YES, else = NO.
+
 
 %%%%%%%%%%%%%%%%%%%%% CODE %%%%%%%%%%%%%%%%%%%%
 %%%% BEST NOT TO ALTER UNLESS YOU ARE SURE %%%%
@@ -138,18 +141,6 @@ modelPred = model_data(ind,:);
 sigma_grid = std(modelPred);
 chiScaled = abs(d) ./ (2*sigma + sigma_grid);
 
-% % Leave-one-out analysis
-% for i = 1:size(model_data,2)
-%     idx = setdiff(1:size(model_data,2), i);
-%     modelData = model_data(:, idx);
-%     data = samples(end, idx);
-%     misfit = sum(abs(modelData - data), 2);
-%     [~, rowIdx] = min(misfit);
-%     bestT = temperature(rowIdx);
-%     bestP = pressure(rowIdx);
-%     distT(i) = bestT - tMed;
-%     distP(i) = bestP - pMed;
-% end
 
 % Leave-One-Out Cross-Validation (LOO-CV)
 nCols = size(model_data,2);
@@ -185,6 +176,8 @@ for i = 1:nCols
     mis(i) = v;
 
     % Store T, P as well
+    dT(i) = bestT;
+    dP(i) = bestP;
     distT(i) = bestT - tMed;
     distP(i) = bestP - pMed;
 end
@@ -216,13 +209,39 @@ if unitsP == 1
 end
 
 % Variables fit
-results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; chiScaled; distT; distP; errors; mis; tmax; pmax];
-dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','X_smooth','T_dist','P_dist','LOO error(%)','LOOfit','ΔT (°C)','ΔP (kbar)'});
+results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; distT; distP; mis; tmax; pmax];
+dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','T_dist','P_dist','LOOfit','ΔT (°C)','ΔP (kbar)'});
 
 % Save results
 filename = "output_variables/TPsolutions_" + sampleName + ".csv";
-writematrix(["Temperature", "Pressure"; [t_best(:), p_best(:)]], filename);
+writematrix(["Temperature", "Pressure"; [t_best(:), p_best(:)]], filename)
 
+% Plot LOO
+if plotLOO == 1
+    figure; hold on
+    cmap = jet(nCols);   % or use parula, jet, hsv, etc.
+    markerStyles = {'o','s','d','^','h'};
+    nMarkers = numel(markerStyles);
+    for fi = 1:nCols
+        % Cycle through markers
+        mkr = markerStyles{mod(fi-1, nMarkers) + 1};
+        plot(dT(fi), dP(fi), mkr, ...
+            'MarkerSize', 8, ...
+            'MarkerFaceColor', cmap(fi,:), ...
+            'MarkerEdgeColor', 'k', ...
+            'DisplayName', variables{fi});
+    end
+    % Plot Best-fit
+    plot(tMed, pMed*1000, 'k*','LineWidth',1 , 'MarkerSize', 10, 'DisplayName','Best-fit');
+    xlabel('Temperature');
+    ylabel('Pressure');
+    title('Leave-One-Out bestfit P-T');
+    grid on;
+    legend
+    xlim([min(temperature) max(temperature)])
+    ylim([min(pressure) max(pressure)])
+    axis square
+end
 
 % Plot results
 if plotBoot == 1
