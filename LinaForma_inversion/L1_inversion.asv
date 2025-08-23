@@ -188,6 +188,22 @@ for i = 1:nCols
     distP(i) = bestP - pMed;
 end
 
+% T and P range of variable
+for i = 1:nCols
+
+    % Find variable range
+    rngMAX = mu(i) + 2*sigma(i);
+    rngMin = mu(i) - 2*sigma(i); if rngMin
+
+
+
+
+
+
+
+
+
+
 
 % Compute sensitivity
 [T_max,T_min,P_max,P_min] = Functions_NO_EDIT.sensitivity(model_data,samples,tMean,pMean,temperature,pressure,sigma,mu,bootstrapType,dataFormat,it);
