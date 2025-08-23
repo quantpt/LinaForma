@@ -1,27 +1,33 @@
 Overall
 -------
-Mean = 577 ± 7 °C, 9.59 ± 0.59 kbar (2σ)
-Median = 576 °C (IQR = 573-582 °C), 9.53 kbar (IQR = 9.2-9.75 kbar)
-X_total (Median) = 0.482
-SE = 3 °C (0.521 %), 0.21 kbar (2.2 %)
-# of variables = 8
-# of fitted variables = 8
+Mean = 581 ± 8 °C, 10.6 ± 1.41 kbar (2σ)
+Median = 579 °C (IQR = 576-588 °C), 10 kbar (IQR = 9.36-12.1 kbar)
+X_total (Median) = 0.789
+SE = 3 °C (0.518 %), 0.47 kbar (4.7 %)
+# of variables = 9
+# of fitted variables = 6
 Model resolution = 3.03 °C, 0.0808 kbar
-Bootstrap resamples = 50
+Bootstrap resamples = 200
 
 Single Variable Diagnostics (Median)
 ------------------------------------
-             xgr[Grt]     xspss[Grt]   tot xprp     Mg#[Grt]     Sipfu[Bt]    xTi[Bt]      Sipfu[mu]    xpa[mu]     
-Column       3            4            5            6            7            9            11           13          
-μ + 2σ       0.07243      0.02657      0.1857       0.1992       2.744        0.1111       3.115        0.2597      
-μ - 2σ       0.04593      0.01084      0.1415       0.1556       2.682        0.09294      3.021        0.2006      
-σ % of μ     11.19        21.02        6.745        6.149        0.5716       4.439        0.7625       6.422       
-Prediction   0.058        0.02016      0.1855       0.1972       2.73         0.09575      3.054        0.2343      
-X_i          0.08957      0.1844       0.9927       0.9063       0.5486       0.6898       0.304        0.142       
-X_smooth     0.03624      0.1564       0.5892       0.5693       0.3675       0.4001       0.2663       0.06906     
-ΔT (°C)      5.734        8.363        2.936        2.139        2.139        3.899        2.139        9.332       
-ΔP (kbar)    0.6736       0.6765       0.1635       0.09982      0.09982      0.2406       0.09982      0.2299      
+             xgr[Grt]     xspss[Grt]   tot xprp     Mg#[Grt]     Sipfu[Bt]    xTi[Bt]      Sipfu[mu]    xcel[mu]     xpa[mu]     
+Column       3            4            5            6            7            9            11           12           13          
+μ + 2σ       0.07243      0.02657      0.1857       0.1992       2.744        0.1111       3.115        0.1014       0.2597      
+μ - 2σ       0.04593      0.01084      0.1415       0.1556       2.682        0.09294      3.021        0.05729      0.2006      
+σ % of μ     11.19        21.02        6.745        6.149        0.5716       4.439        0.7625       13.89        6.422       
+Prediction   0.05902      0.01781      0.1984       0.2102       2.734        0.09626      3.056        0.04124      0.2482      
+X_i          0.01236      0.1139       1.578        1.5          0.6613       0.6339       0.261        1.728        0.61        
+X_smooth     0.004972     0.09303      0.8351       0.836        0.4153       0.3792       0.2331       1.532        0.3253      
+T_dist       -15.15       -12.12       0            0            -15.15       -12.12       -12.12       -12.12       6.061       
+P_dist       161.6        -1212        -404         -404         242.4        -1212        -1212        -1212        -1374       
+LOO error(%) 55.78        58.71        14.51        13.2         2            8.455        0.6151       56.43        25.05       
+ΔT (°C)      8.896        15.62        2.986        3.202        2.412        2.412        2.412        3.75         8.627       
+ΔP (kbar)    2.471        3.063        0.9497       0.9674       0.919        0.919        0.919        0.9904       1.597       
 
 Result Summary
 --------------
 Fit is acceptable. Inversion score below 1.
+**** Warning: tot xprp has a score above 1 (Score: 1.58). The result is sensitive to this variable (T: 0.51%; P: 8.95%). Please remove.
+**** Warning: Mg#[Grt] has a score above 1 (Score: 1.50). The result is sensitive to this variable (T: 0.55%; P: 9.12%). Please remove.
+**** Warning: xcel[mu] has a score above 1 (Score: 1.73). The result is sensitive to this variable (T: 0.65%; P: 9.34%). Please remove.

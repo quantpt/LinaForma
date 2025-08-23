@@ -8,9 +8,13 @@ fileID = fopen(name, 'w');
 writeBoth = @(fmt, varargin) fprintf(fmt, varargin{:}) & fprintf(fileID, fmt, varargin{:});
 
 % Calculate sensitivity percentage
-temp_sens = T{7,:}./meanT * 100;
+rows = T.Properties.RowNames;
+idT = find(strcmp(rows, 'ΔT (°C)'));
+temp_sens = T{idT,:}./meanT * 100;
 temp_sens = round(temp_sens,2);
-pres_sens = T{8,:}./meanP * 100;
+
+idP = find(strcmp(rows, 'ΔP (kbar)'));
+pres_sens = T{idP,:}./meanP * 100;
 pres_sens = round(pres_sens,2);
 
 

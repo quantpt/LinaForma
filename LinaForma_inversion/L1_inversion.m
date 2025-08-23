@@ -11,14 +11,14 @@ measurements = 'inputs/input_ICSV13.csv'; % Measurements
 
 % ====== Data type ======
 dataFormat = 0; % What type of data do you have? 1 = all measurements. 0 = mean and std. of variables.
-keep_cols = [1:13];% % These are the columns of the model, inlcuding T & P
+keep_cols = [1:7,9,11:13]; % These are the columns of the model, inlcuding T & P
 
 % ====== Pressure units in forward model ======
 unitsP = 1; % 1 = bar, Else = kbar.
 
 % ====== Bootstrapping parameters ======
 bootstrapType = 1;      % 1 = Parametric. Else = non-parametric.
-it = 50;        % How many random iterations do you want to calculate?
+it = 200;        % How many random iterations do you want to calculate?
 
 % ====== Plotting ======
 % Bootstrap progress
@@ -37,7 +37,6 @@ plotResiduals = 0; % 1 = YES, else = NO.
 
 % Sensitivity
 plotSens = 0; % 1 = YES, else = NO.
-
 
 
 %%%%%%%%%%%%%%%%%%%%% CODE %%%%%%%%%%%%%%%%%%%%
@@ -139,6 +138,53 @@ modelPred = model_data(ind,:);
 sigma_grid = std(modelPred);
 chiScaled = abs(d) ./ (2*sigma + sigma_grid);
 
+% % Leave-one-out analysis
+% for i = 1:size(model_data,2)
+%     idx = setdiff(1:size(model_data,2), i);
+%     modelData = model_data(:, idx);
+%     data = samples(end, idx);
+%     misfit = sum(abs(modelData - data), 2);
+%     [~, rowIdx] = min(misfit);
+%     bestT = temperature(rowIdx);
+%     bestP = pressure(rowIdx);
+%     distT(i) = bestT - tMed;
+%     distP(i) = bestP - pMed;
+% end
+
+% Leave-One-Out Cross-Validation (LOO-CV)
+nCols = size(model_data,2);
+nRows = size(model_data,1);
+errors = zeros(1, nCols);  % prediction error for left-out column
+distT = zeros(1, nCols);
+distP = zeros(1, nCols);
+for i = 1:nCols
+    % Indices excluding i
+    idx = setdiff(1:nCols, i);
+
+    % Model subset and data subset
+    modelData = model_data(:, idx);
+    data = samples(end, idx);
+
+    % Find row with smallest misfit (L1 norm) on training subset
+    misfit = sum(abs(modelData - data), 2);
+    [~, rowIdx] = min(misfit);
+
+    % Best (T, P) from training subset
+    bestT = temperature(rowIdx);
+    bestP = pressure(rowIdx);
+
+    % --- Predict left-out column ---
+    predictedVal = model_data(rowIdx, i);
+    trueVal      = samples(end, i);
+
+    % Prediction error for left-out column
+    errors(i) = abs(predictedVal - trueVal)./trueVal*100;
+
+    % Store T, P as well
+    distT(i) = bestT - tMed;
+    distP(i) = bestP - pMed;
+end
+
 % Compute sensitivity
 [T_max,T_min,P_max,P_min] = Functions_NO_EDIT.sensitivity(model_data,samples,tMean,pMean,temperature,pressure,sigma,mu,bootstrapType,dataFormat,it);
 tmp01 = [abs(T_max);abs(T_min)]; tmax = max(tmp01,[],1);
@@ -165,8 +211,8 @@ if unitsP == 1
 end
 
 % Variables fit
-results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; chiScaled; tmax; pmax];
-dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','X_smooth','ΔT (°C)','ΔP (kbar)'});
+results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; chiScaled; distT; distP; errors; tmax; pmax];
+dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','X_smooth','T_dist','P_dist','LOO error(%)','ΔT (°C)','ΔP (kbar)'});
 
 % Save results
 filename = "output_variables/TPsolutions_" + sampleName + ".csv";
