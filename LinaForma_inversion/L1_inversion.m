@@ -5,20 +5,20 @@ clear;clc; % Clear command window
 %%%%%%%%% INPUTS %%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % ====== Data ======
-sampleName = 'ICSV13';
-model = 'inputs/forward_ICSV13.csv'; % Forward models.
-measurements = 'inputs/input_ICSV13.csv'; % Measurements
+sampleName = 'ICSV114';
+model = 'inputs/forward_ICSV144.csv'; % Forward models.
+measurements = 'inputs/input_ICSV144.csv'; % Measurements
 
 % ====== Data type ======
 dataFormat = 0; % What type of data do you have? 1 = all measurements. 0 = mean and std. of variables.
-keep_cols = [1:7,9,11:13]; % These are the columns of the model, inlcuding T & P
+ keep_cols = [1,2,6,8,9,10,12,14]; % These are the columns of the model, inlcuding T & P
 
 % ====== Pressure units in forward model ======
 unitsP = 1; % 1 = bar, Else = kbar.
 
 % ====== Bootstrapping parameters ======
 bootstrapType = 1;      % 1 = Parametric. Else = non-parametric.
-it = 200;        % How many random iterations do you want to calculate?
+it = 50;        % How many random iterations do you want to calculate?
 
 % ====== Plotting ======
 % Bootstrap progress
@@ -39,7 +39,7 @@ plotResiduals = 0; % 1 = YES, else = NO.
 plotSens = 0; % 1 = YES, else = NO.
 
 % LOOfit
-plotLOO = 1; % 1  = YES, else = NO.
+plotLOOA = 1; % 1  = YES, else = NO.
 
 
 %%%%%%%%%%%%%%%%%%%%% CODE %%%%%%%%%%%%%%%%%%%%
@@ -98,7 +98,7 @@ end
 
 % Find mean and standard deviation of measurements
 if dataFormat == 0
-    sigma = obs(2,:); mu = obs(1,:);
+    sigma = obs(2,:).*0.5; mu = obs(1,:);
 else
     sigma = std(obs,1); mu = mean(obs,1);
 end
@@ -110,7 +110,6 @@ else % Non-parametric
     samples = Functions_NO_EDIT.nonpara_boot(it,obs);
 end
 samples = [samples;mean(samples,1)];
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% PART3: Perform the grid-search inversion and sensitivity analysis %%%%
@@ -182,6 +181,15 @@ for i = 1:nCols
     distP(i) = bestP - pMed;
 end
 
+% Plot LOOA
+Thigh = max(dT - tMed,0);
+Tlow = max(tMed - dT,0);
+Phigh = max(dP - pMed,0);
+Plow = max(pMed - dP,0);
+if plotLOOA == 1
+    Functions_NO_EDIT.plotLOOA(Tlow, Thigh, Plow, Phigh, variables, tMed, pMed, sampleName);
+end
+
 
 % Compute sensitivity
 [T_max,T_min,P_max,P_min] = Functions_NO_EDIT.sensitivity(model_data,samples,tMean,pMean,temperature,pressure,sigma,mu,bootstrapType,dataFormat,it);
@@ -217,7 +225,7 @@ filename = "output_variables/TPsolutions_" + sampleName + ".csv";
 writematrix(["Temperature", "Pressure"; [t_best(:), p_best(:)]], filename)
 
 % Plot LOO
-if plotLOO == 1
+if plotLOOA == 1
     figure; hold on
     cmap = jet(nCols);   % or use parula, jet, hsv, etc.
     markerStyles = {'o','s','d','^','h'};
