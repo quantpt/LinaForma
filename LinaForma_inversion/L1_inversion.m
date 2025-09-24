@@ -25,7 +25,7 @@ it = 50;        % How many random iterations do you want to calculate?
 plotBoot = 0; % 1 = YES, else = NO.
 
 % Inversion results
-plotInv = 0; % 1 = YES, else = NO.
+plotInv = 1; % 1 = YES, else = NO.
 confidenceLevel = 0.68;  % Confidence level for 2D ellipse
 boxplots = 1;   % Do you want boxplots or histograms? 1 = boxplot, 0 = histogram
 plot_type = 0; % What type of plot do you want? 1 = contour plot, 0 = heatmap;
@@ -39,7 +39,7 @@ plotResiduals = 0; % 1 = YES, else = NO.
 plotSens = 0; % 1 = YES, else = NO.
 
 % LOOfit
-plotLOOA = 1; % 1  = YES, else = NO.
+plotLOOA = 0; % 1  = YES, else = NO.
 
 
 %%%%%%%%%%%%%%%%%%%%% CODE %%%%%%%%%%%%%%%%%%%%
@@ -98,7 +98,7 @@ end
 
 % Find mean and standard deviation of measurements
 if dataFormat == 0
-    sigma = obs(2,:).*0.5; mu = obs(1,:);
+    sigma = obs(2,:); mu = obs(1,:);
 else
     sigma = std(obs,1); mu = mean(obs,1);
 end
