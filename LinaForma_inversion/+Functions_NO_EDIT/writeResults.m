@@ -32,7 +32,6 @@ writeBoth('-------\n');
 writeBoth('Mean = %.3g ± %.3g °C, %.3g ± %.3g kbar (2σ)\n', meanT, stdT, meanP, stdP);
 writeBoth('Median = %.3g °C (IQR = %.3g-%.3g °C), %.3g kbar (IQR = %.3g-%.3g kbar)\n', medianT, iqrT1,iqrT2, medianP, iqrP1,iqrP2);
 writeBoth('X_total (Median) = %.3g\n', score(1));
-writeBoth('SE = %.3g °C (%.3g %%), %.3g kbar (%.3g %%)\n', score(2), score(2) / medianT * 100, score(3), score(3) / medianP * 100);
 writeBoth('# of variables = %.3g\n', score(4));
 writeBoth('# of fitted variables = %.3g\n', score(5));
 writeBoth('Model resolution = %.3g °C, %.3g kbar\n', score(6), score(7));

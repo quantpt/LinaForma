@@ -172,7 +172,9 @@ for i = 1:nCols
 
     % Prediction error for left-out column
     errors(i) = abs(predictedVal - trueVal)./trueVal*100;
-    mis(i) = v;
+    d = predictedVal - trueVal;
+    chiV = sum(abs(d) ./ (2 * sigma))/length(d);
+    mis(i) = chiV;
 
     % Store T, P as well
     dT(i) = bestT;
