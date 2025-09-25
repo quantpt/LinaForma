@@ -142,49 +142,75 @@ chiScaled = abs(d) ./ (2*sigma + sigma_grid);
 
 
 % Leave-One-Out Cross-Validation (LOO-CV)
+[mis,dT,dP,distT,distP,~,~] = Functions_NO_EDIT.LOOfit(model_data,samples,temperature,pressure,tMed,pMed,mu,sigma);
+
+
+% Nested LOO
 nCols = size(model_data,2);
-nRows = size(model_data,1);
-errors = zeros(1, nCols);  % prediction error for left-out column
-distT = zeros(1, nCols);
-distP = zeros(1, nCols);
+dispersion = zeros(1,nCols);
 for i = 1:nCols
-    % Indices excluding i
+
+    % Construct new dataset
     idx = setdiff(1:nCols, i);
+    model_data_2 = model_data(:,idx);
+    samples_2 = samples(:, idx);
+    mu_2 = mu(idx);
+    sigma_2 = sigma(idx);
 
-    % Model subset and data subset
-    modelData = model_data(:, idx);
-    data = samples(end, idx);
+    % Run LOOfit
+    [~,~,~,~,~,Tbest,Pbest] = Functions_NO_EDIT.LOOfit(model_data_2,samples_2,temperature,pressure,tMed,pMed,mu_2,sigma_2);
 
-    % Find row with smallest misfit (L1 norm) on training subset
-    normalizedDiff = abs(modelData - data) ./ abs(data);
-    misfit = sum(normalizedDiff, 2);
-
-    % Find row with smallest normalized misfit
-    [v, rowIdx] = min(misfit);
-
-    % Best (T, P) from training subset
-    bestT = temperature(rowIdx);
-    bestP = pressure(rowIdx);
-
-    % --- Predict left-out column ---
-    predictedVal = model_data(rowIdx, i);
-    trueVal      = samples(end, i);
-
-    % Prediction error for left-out column
-    errors(i) = abs(predictedVal - trueVal)./trueVal*100;
-    dpred = model_data(rowIdx,idx);
-    dmeasured = mu(idx);
-    sigma_id = sigma(idx);
-    d = dpred - dmeasured;
-    chiV = sum(abs(d) ./ (2 * sigma_id))/length(d);
-    mis(i) = chiV;
-
-    % Store T, P as well
-    dT(i) = bestT;
-    dP(i) = bestP;
-    distT(i) = bestT - tMed;
-    distP(i) = bestP - pMed;
+    % Compute dispersion
+    bounding_box = (max(Tbest)-min(Tbest)) * (max(Pbest)-min(Pbest)); % Bounding box
+    total_box = (max(temperature)-min(temperature)) * (max(pressure)-min(pressure)); 
+    dispersion(i) = bounding_box/total_box * 100;
 end
+ 
+
+
+% nCols = size(model_data,2);
+% nRows = size(model_data,1);
+% errors = zeros(1, nCols);  % prediction error for left-out column
+% distT = zeros(1, nCols);
+% distP = zeros(1, nCols);
+% for i = 1:nCols
+%     % Indices excluding i
+%     idx = setdiff(1:nCols, i);
+
+%     % Model subset and data subset
+%     modelData = model_data(:, idx);
+%     data = samples(end, idx);
+
+%     % Find row with smallest misfit (L1 norm) on training subset
+%     normalizedDiff = abs(modelData - data) ./ abs(data);
+%     misfit = sum(normalizedDiff, 2);
+
+%     % Find row with smallest normalized misfit
+%     [v, rowIdx] = min(misfit);
+
+%     % Best (T, P) from training subset
+%     bestT = temperature(rowIdx);
+%     bestP = pressure(rowIdx);
+
+%     % --- Predict left-out column ---
+%     predictedVal = model_data(rowIdx, i);
+%     trueVal      = samples(end, i);
+
+%     % Prediction error for left-out column
+%     errors(i) = abs(predictedVal - trueVal)./trueVal*100;
+%     dpred = model_data(rowIdx,idx);
+%     dmeasured = mu(idx);
+%     sigma_id = sigma(idx);
+%     d = dpred - dmeasured;
+%     chiV = sum(abs(d) ./ (2 * sigma_id))/length(d);
+%     mis(i) = chiV;
+
+%     % Store T, P as well
+%     dT(i) = bestT;
+%     dP(i) = bestP;
+%     distT(i) = bestT - tMed;
+%     distP(i) = bestP - pMed;
+% end
 
 % Plot LOOA
 Thigh = max(dT - tMed,0);
@@ -222,8 +248,8 @@ if unitsP == 1
 end
 
 % Variables fit
-results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; distT; distP; mis; tmax; pmax];
-dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','T_dist','P_dist','LOOfit','ΔT (°C)','ΔP (kbar)'});
+results = [keep_cols(3:end); mu + 2*sigma; mu - 2*sigma; sigma./mu *100; model_prediction; chiMedVar; distT; distP; mis;dispersion; tmax; pmax];
+dfit = array2table(results,'VariableNames',variables,'RowNames',{'Column','μ + 2σ', 'μ - 2σ','σ % of μ','Prediction','X_i','T_dist','P_dist','LOOfit','LOOfit^2','ΔT (°C)','ΔP (kbar)'});
 
 % Save results
 filename = "output_variables/TPsolutions_" + sampleName + ".csv";
