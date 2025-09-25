@@ -25,7 +25,7 @@ it = 50;        % How many random iterations do you want to calculate?
 plotBoot = 0; % 1 = YES, else = NO.
 
 % Inversion results
-plotInv = 1; % 1 = YES, else = NO.
+plotInv = 0; % 1 = YES, else = NO.
 confidenceLevel = 0.68;  % Confidence level for 2D ellipse
 boxplots = 1;   % Do you want boxplots or histograms? 1 = boxplot, 0 = histogram
 plot_type = 0; % What type of plot do you want? 1 = contour plot, 0 = heatmap;
@@ -172,8 +172,11 @@ for i = 1:nCols
 
     % Prediction error for left-out column
     errors(i) = abs(predictedVal - trueVal)./trueVal*100;
-    d = predictedVal - trueVal;
-    chiV = sum(abs(d) ./ (2 * sigma))/length(d);
+    dpred = model_data(rowIdx,idx);
+    dmeasured = mu(idx);
+    sigma_id = sigma(idx);
+    d = dpred - dmeasured;
+    chiV = sum(abs(d) ./ (2 * sigma_id))/length(d);
     mis(i) = chiV;
 
     % Store T, P as well

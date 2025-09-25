@@ -1,8 +1,8 @@
 Overall
 -------
-Mean = 677 ± 29 °C, 5.19 ± 1.7 kbar (2σ)
-Median = 679 °C (IQR = 671-691 °C), 5.07 kbar (IQR = 3.94-6.65 kbar)
-X_total (Median) = 1.16
+Mean = 675 ± 35 °C, 4.99 ± 1.43 kbar (2σ)
+Median = 681 °C (IQR = 675-689 °C), 4.91 kbar (IQR = 3.86-6.2 kbar)
+X_total (Median) = 1.15
 # of variables = 6
 # of fitted variables = 3
 Model resolution = 2.02 °C, 0.0808 kbar
@@ -15,17 +15,17 @@ Column       6            8            9            10           12           14
 μ + 2σ       0.7095       0.05831      0.6539       1.064        0.6689       0.07181     
 μ - 2σ       0.6045       0.02454      0.5409       0.9016       0.556        -0.002036   
 σ % of μ     3.998        20.38        4.73         4.126        4.611        52.92       
-Prediction   0.5442       0.04561      0.5388       1.188        0.5745       0.02269     
-X_i          2.148        0.2474       1.038        2.531        0.6722       0.3303      
-T_dist       -8.081       -94.95       8.081        -8.081       -8.081       6.061       
-P_dist       2182         1778         -80.81       2182         2182         -888.9      
-LOOfit       18.95        4.793        12.64        45.46        3.975        2.78        
-ΔT (°C)      4.238        58.63        7.27         4.238        4.238        40.33       
-ΔP (kbar)    1.819        3.86         2.243        1.819        1.819        2.973       
+Prediction   0.5425       0.04466      0.5345       1.178        0.5747       0.02195     
+X_i          2.179        0.1914       1.113        2.412        0.6693       0.3505      
+T_dist       -10.1        -86.87       6.061        -12.12       -10.1        6.061       
+P_dist       2343         2263         80.81        2505         2343         -727.3      
+LOOfit       1.031        0.9877       1.091        0.7591       1.381        1.266       
+ΔT (°C)      2.099        38.42        4.82         2.099        2.099        32.84       
+ΔP (kbar)    2.017        3.938        2.384        2.017        2.017        3.237       
 
 Result Summary
 --------------
 **** Warning: Fit is poor. Inversion score above 1. Remove ill-fitting variables.
-**** Warning: xab[Pl] has a score above 1 (Score: 2.15).
-**** Warning: Ed[Amp] has a score above 1 (Score: 1.04).
-**** Warning: Ts[Amp] has a score above 1 (Score: 2.53).
+**** Warning: xab[Pl] has a score above 1 (Score: 2.18).
+**** Warning: Ed[Amp] has a score above 1 (Score: 1.11).
+**** Warning: Ts[Amp] has a score above 1 (Score: 2.41).
