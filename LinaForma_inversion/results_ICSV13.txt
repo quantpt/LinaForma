@@ -1,32 +1,31 @@
 Overall
 -------
-Mean = 580 ± 9 °C, 10.5 ± 1.45 kbar (2σ)
-Median = 579 °C (IQR = 573-585 °C), 9.85 kbar (IQR = 9.28-12.1 kbar)
-X_total (Median) = 0.69
-SE = 3 °C (0.518 %), 0.48 kbar (4.87 %)
+Mean = 602 ± 13 °C, 11.5 ± 1.47 kbar (2σ)
+Median = 601 °C (IQR = 595-607 °C), 12.2 kbar (IQR = 9.89-12.7 kbar)
+X_total (Median) = 2.91
 # of variables = 9
-# of fitted variables = 6
+# of fitted variables = 4
 Model resolution = 3.03 °C, 0.0808 kbar
-Bootstrap resamples = 200
+Bootstrap resamples = 50
 
 Single Variable Diagnostics (Median)
 ------------------------------------
-             xgr[Grt]     xspss[Grt]   tot xprp     Mg#[Grt]     Sipfu[Bt]    xTi[Bt]      Sipfu[mu]    xcel[mu]     xpa[mu]     
-Column       3            4            5            6            7            9            11           12           13          
-μ + 2σ       0.07243      0.02657      0.1857       0.1992       2.744        0.1111       3.115        0.1014       0.2597      
-μ - 2σ       0.04593      0.01084      0.1415       0.1556       2.682        0.09294      3.021        0.05729      0.2006      
-σ % of μ     11.19        21.02        6.745        6.149        0.5716       4.439        0.7625       13.89        6.422       
-Prediction   0.05834      0.01856      0.194        0.2056       2.731        0.09653      3.056        0.04104      0.2385      
-X_i          0.06386      0.01897      1.377        1.291        0.581        0.604        0.252        1.737        0.2832      
-T_dist       -6.061       -9.091       0            0            0            0            0            0            -6.061      
-P_dist       2424         -1131        -161.6       -161.6       -161.6       -161.6       -161.6       -161.6       2424        
-LOOfit       0.3571       0.7371       0.7361       0.756        0.8821       0.8351       0.8846       0.4046       0.8163      
-ΔT (°C)      7.76         15.72        2.23         2.23         1.357        1.357        1.357        2.794        7.729       
-ΔP (kbar)    2.307        3.032        0.9097       0.9041       0.8575       0.8575       0.8575       0.9342       1.248       
+             xgr[Grt]     xspss[Grt]   tot xprp     Mg#[Grt]     Sipfu[Bt]    xTi[Bt]      Mg#[Bt]      Sipfu[mu]    xcel[mu]    
+Column       3            4            5            6            7            8            9            10           11          
+μ + 2σ       0.07243      0.02657      0.1857       0.1992       2.741        0.1183       0.4959       3.115        0.1014      
+μ - 2σ       0.04593      0.01084      0.1415       0.1556       2.686        0.09032      0.4836       3.021        0.05729     
+σ % of μ     11.19        21.02        6.745        6.149        0.5132       6.714        0.6322       0.7625       13.89       
+Mod          0.0792       0.01673      0.2009       0.2155       2.792        0.1028       0.595        3.105        0.07337     
+f_i          1.51         0.2511       1.69         1.745        2.806        0.1093       17           0.7994       0.2703      
+ftotal(i)    2.254        1.148        2.845        2.833        2.528        2.768        1.156        2.821        1.969       
+ΔT (°C)      23.17        22.75        11.52        11.18        10.1         10.1         10.1         10.1         10.1        
+ΔP (kbar)    2.531        2.942        0.9019       0.8667       0.8667       0.8667       0.8667       0.8667       1.805       
 
 Result Summary
 --------------
-Fit is acceptable. Inversion score below 1.
-**** Warning: tot xprp has a score above 1 (Score: 1.38). The result is sensitive to this variable (T: 0.38%; P: 8.63%). Please remove.
-**** Warning: Mg#[Grt] has a score above 1 (Score: 1.29). The result is sensitive to this variable (T: 0.38%; P: 8.57%). Please remove.
-**** Warning: xcel[mu] has a score above 1 (Score: 1.74). The result is sensitive to this variable (T: 0.48%; P: 8.86%). Please remove.
+**** Warning: Fit is poor. Inversion score above 1. Remove ill-fitting variables.
+**** Warning: xgr[Grt] has a score above 1 (Score: 1.51).
+**** Warning: tot xprp has a score above 1 (Score: 1.69).
+**** Warning: Mg#[Grt] has a score above 1 (Score: 1.75).
+**** Warning: Sipfu[Bt] has a score above 1 (Score: 2.81).
+**** Warning: Mg#[Bt] has a score above 1 (Score: 17.00).
