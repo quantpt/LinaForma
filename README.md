@@ -25,7 +25,7 @@ Citation
 If you find this package useful, please do consider citing it using the following:
 
 ```console
-Mackay-Champion, T., & Cawood, I. P. (2024). LinaForma [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.11110440
+Mackay-Champion, T., and I. P. Cawood. 2025. “ An Inverse Method for Quantifying Petrological Parameters and Uncertainty in Phase Equilibrium Modelling.” Journal of Metamorphic Geology 1–15. https://doi.org/10.1111/jmg.70016.
 ```
 
 
